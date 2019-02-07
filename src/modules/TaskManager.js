@@ -15,9 +15,25 @@ export default {
         body: JSON.stringify(newTask)
       }).then(data => data.json())
     },
+
+    get(id) {
+        return fetch(`${remoteURL}/tasks/${id}`)
+        .then(e => e.json())
+    },
+
+    put(taskId, existingTask) {
+        return fetch(`${remoteURL}/tasks/${taskId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(existingTask)
+        }).then(data => data.json());
+    },
+
     removeTask(id) {
         return fetch(`${remoteURL}/tasks/${id}`, {
-            method: "DELETE"
+          method: "DELETE"
         })
     }
 
