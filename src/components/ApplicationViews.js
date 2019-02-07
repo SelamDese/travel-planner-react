@@ -40,7 +40,18 @@ export default class ApplicationViews extends Component {
             tasks: tasks
           })
         )
-        } 
+        }
+        
+     updateTask = (taskId, editedTaskObj) => {
+      return TaskManager.put(taskId, editedTaskObj)
+        .then(() => TaskManager.getAll())
+        .then(tasks => {
+          this.setState({
+            tasks: tasks
+          })
+        })
+        }  
+
      deleteTask = (id) => {
       return TaskManager.removeTask(id)
         .then(() => TaskManager.getAll())
