@@ -41,7 +41,15 @@ export default class ApplicationViews extends Component {
           })
         )
         } 
-
+     deleteTask = (id) => {
+      return TaskManager.removeTask(id)
+        .then(() => TaskManager.getAll())
+        .then(tasks => 
+          this.setState({
+            tasks: tasks
+          })
+        )
+        } 
        registerNewUser(users){
           return LoginManager.post(users)
             //   .then(() => {
