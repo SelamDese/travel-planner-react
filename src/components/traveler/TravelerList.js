@@ -9,8 +9,19 @@ export default class TravelerList extends Component {
                    <p> {traveler.firstName} </p>
                    <p> {traveler.lastName} </p>
                    <p> {traveler.numberOfFamily}</p>
+                   <p> {traveler.tripPlace}</p>
+                   <p> {traveler.tripPlace}</p>
               </div>
             ))}
+              <div>
+                <button type="button"
+                    onClick={() => {
+                        this.props.history.push("/newTraveler")
+                    }
+                    }>
+                    Add Traveler
+                </button>
+              </div>
           </section>
         )
       }
