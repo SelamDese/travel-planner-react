@@ -12,7 +12,7 @@ export default class LoginForm extends Component {
     this.setState(stateToChange)
   }
 
-  constructUsers = (evt) => {
+  constructLogin = (evt) => {
     evt.preventDefault()
     const newUser = {
         userName: this.state.userName,
@@ -38,7 +38,7 @@ export default class LoginForm extends Component {
          onChange={this.handleFieldChange}
         />
       </div>
-      <button type="Save" onClick={this.constructUsers} > Register </button>
+      <button type="Save" onClick={this.constructLogin} > Login </button>
     </form>
   </React.Fragment>
         )

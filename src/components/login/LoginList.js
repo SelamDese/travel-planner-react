@@ -4,8 +4,9 @@ export default class LoginList extends Component {
     render() {
         return (
           <section>
-            <p>please register</p>
-            <a href="/newUser" onClick={() => this.props.registerNewUser()}> Register </a>
+            <p>please Login</p>
+            {/* <button type="Save" onClick={this.props.constructUsers} > Register </button> */}
+            <a href="/userLogin" onClick={() => this.props.registerNewUser}> Login </a>
           </section>
         )
       }
