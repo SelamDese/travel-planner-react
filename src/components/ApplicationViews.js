@@ -4,7 +4,12 @@ import TravelerList from "./traveler/TravelerList"
 import TaskList from "./task/TaskList"
 import TripList from "./trip/TripList"
 import LoginList from "./login/LoginList"
+import Registration from "./login/Registration"
+import TravelerForm from "./traveler/TravelForm"
+import TripForm from "./trip/TripForm"
+import TaskForm from "./task/TaskForm"
 import LoginForm from "./login/LoginForm"
+import RegistrationForm from "./login/RegistrationForm"
 import TravelerManager from "../modules/TravelerManager"
 import TaskManager from "../modules/TaskManager"
 import TripManager from "../modules/TripManager"
@@ -17,16 +22,45 @@ export default class ApplicationViews extends Component {
       tasks: [],
       users:[]
      }
-
-     registerNewUser(users){
-        return LoginManager.post(users)
-            .then(() => LoginManager.getAll())
-            .then(users =>
-            this.setState({
-                users: users
-               })
-            ) 
+     addNewTraveler = (traveler) =>{
+      return TravelerManager.post(traveler)
+        .then(() => TravelerManager.getAll())
+        .then(travelers =>
+          this.setState({
+            travelers: travelers
+          })
+        )
         }
+
+      addNewTrip = (trip) =>{
+        return TripManager.post(trip)
+          .then(() => TripManager.getAll())
+          .then(trips =>
+            this.setState({
+              trips: trips
+            })
+          )
+          }
+        addNewTask = (task) =>{
+          return TaskManager.post(task)
+            .then(() => TaskManager.getAll())
+            .then(tasks =>
+              this.setState({
+                tasks: tasks
+              })
+            )
+            }
+
+        registerNewUser(users){
+            return LoginManager.post(users)
+              //   .then(() => {
+              //   return LoginManager.getAll()})
+              //   .then(users =>
+              //   this.setState({
+              //   users: users
+              //   })
+              // )
+            }
 
      componentDidMount() {
 
@@ -61,11 +95,21 @@ export default class ApplicationViews extends Component {
     
             <Route
               exact path="/" render={props => {
-                 return ( <LoginList {...props} registerNewUser={this.registerNewUser} users={this.state.users} /> )
+                 return ( <LoginList {...props} users={this.state.users} /> )
+              }}
+            />
+            <Route
+              exact path="/" render={props => {
+                 return ( <Registration {...props} users={this.state.users} /> )
               }}
             />
             <Route
               path="/newUser" render={props => {
+                 return ( <RegistrationForm {...props} registerNewUser={this.registerNewUser} /> )
+              }}
+            />
+            <Route
+              path="/userLogin" render={props => {
                  return ( <LoginForm {...props} registerNewUser={this.registerNewUser} /> )
               }}
             />
@@ -75,13 +119,28 @@ export default class ApplicationViews extends Component {
               }}
             />
             <Route
+              exact path="/newTraveler" render={props => {
+                return ( <TravelerForm {...props} addNewTraveler={this.addNewTraveler} /> )
+              }}
+            />
+            <Route
               path="/trips" render={props => {
                  return ( <TripList {...props} trips={this.state.trips} /> )
               }}
             />
             <Route
+              path="/newTrip" render={props => {
+                 return ( <TripForm {...props} addNewTrip={this.addNewTrip} /> )
+              }}
+            />
+            <Route
               path="/tasks" render={props => {
                 return <TaskList {...props} tasks={this.state.tasks}/>
+              }}
+            />
+            <Route
+              path="/newTask" render={props => {
+                return <TaskForm {...props} addNewTask={this.addNewTask}/>
               }}
             />
         </React.Fragment>
