@@ -137,6 +137,11 @@ export default class ApplicationViews extends Component {
                 return <TaskForm {...props} addNewTask={this.addNewTask}/>
               }}
             />
+            <Route
+              path="/tasks/:taskId(\d+)/edit" render={props => {
+                return <TaskEditForm {...props} updateTask={this.updateTask}/>
+              }}
+            />
         </React.Fragment>
         )}
 }
