@@ -10,7 +10,7 @@ export default class TaskList extends Component {
                   <p> {task.taskName} </p>
                   <p> {task.dueDate} </p>
                   <p> {task.complitionDate}</p>
-                  
+                  <Link to={`/tasks/${task.id}/edit`}>Edit</Link>
                   <a href="#" onClick={() => this.props.deleteTask(task.id)}> Delete </a>
               </div>
             ))}
