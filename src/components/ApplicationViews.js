@@ -94,7 +94,17 @@ export default class ApplicationViews extends Component {
                 trips: trips
               })
             )
-            }    
+            }
+            
+        deleteTrip = (id) => {
+          return TripManager.removeTrip(id)
+            .then(() => TripManager.getAll())
+            .then(trips => 
+              this.setState({
+                trips: trips
+              })
+            )
+            }     
         
         registerNewUser(users){
           return LoginManager.post(users)
@@ -186,7 +196,7 @@ export default class ApplicationViews extends Component {
             />
             <Route
               path="/trips" render={props => {
-                 return ( <TripList {...props} trips={this.state.trips} /> )
+                 return ( <TripList {...props} deleteTrip={this.deleteTrip} trips={this.state.trips} /> )
               }}
             />
             <Route
