@@ -4,7 +4,8 @@ export default class TravelerForm extends Component {
   state = {
    firstName: "",
    lastName: "",
-    numberOfFamily: ""
+   numberOfFamily: "",
+   place:""
   }
 
   handleTravelerFieldChange = (evt) => {
@@ -19,10 +20,21 @@ export default class TravelerForm extends Component {
     const newTraveler = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
-      numberOfFamily: this.state.numberOfFamily
+      numberOfFamily: this.state.numberOfFamily,
+      // place: this.state.place
     }
+  
       this.props.addNewTraveler(newTraveler)
+        .then((any) => {
+console.log(any)
+      const newTravelerTrip = {
+        place: this.state.place,
+        travelerId:any.id
+      }    
+
+        this.props.addTravelerTrip(newTravelerTrip)
         .then(() => this.props.history.push("/travelers"))
+    })
   }
 
   render() {
@@ -43,9 +55,16 @@ export default class TravelerForm extends Component {
       </div>
       <div>
         <label htmlFor="numberOfFamily">Number Of Family</label>
-        <input type="text" required id="unumberOfFamilyrl"
+        <input type="text" required id="numberOfFamily"
          onChange={this.handleTravelerFieldChange}
         />
+      </div>
+      <div>
+        <label htmlFor="place">Trip Place</label>
+        <select value="" id="place"
+         onChange={this.handleTravelerFieldChange}>
+          {this.props.trips.map(trip=> <option key={trip.id}>{trip.place}</option>)}
+        </select>
       </div>
       <button type="Save" onClick={this.constructTrveler} > Save </button>
     </form>
