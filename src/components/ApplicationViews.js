@@ -2,36 +2,49 @@ import { Route, Redirect } from "react-router-dom"
 import React, { Component } from "react"
 import TravelerList from "./traveler/TravelerList"
 import TaskList from "./task/TaskList"
-// import TripList from "./trip/TripList"
+import TripList from "./trip/TripList"
 import LoginList from "./login/LoginList"
 import Registration from "./login/Registration"
 import TravelerForm from "./traveler/TravelForm"
-// import TripForm from "./trip/TripForm"
+import TripForm from "./trip/TripForm"
 import TaskForm from "./task/TaskForm"
 import TaskEditForm from "./task/TaskEditForm"
 import LoginForm from "./login/LoginForm"
 import RegistrationForm from "./login/RegistrationForm"
 import TravelerManager from "../modules/TravelerManager"
 import TaskManager from "../modules/TaskManager"
-// import TripManager from "../modules/TripManager"
+import TripManager from "../modules/TripManager"
 import LoginManager from "../modules/LoginManager"
+import TravelerTripManager from "../modules/TravelerTripManager"
 
 export default class ApplicationViews extends Component {
     state = {
       travelers: [],
       trips: [],
       tasks: [],
-      users:[]
+      users:[],
+      travelerTrips:[]
      }
      addNewTraveler = (traveler) =>{
       return TravelerManager.post(traveler)
-        .then(() => TravelerManager.getAll())
-        .then(travelers =>
-          this.setState({
-            travelers: travelers
-          })
-        )
+        // .then(() => TravelerManager.getAll())
+        // .then(travelers =>
+        //   this.setState({
+        //     travelers: travelers
+        //   })
+        // )
         }
+
+     addTravelerTrip = (travelerTrip) =>{
+      return TravelerTripManager.post(travelerTrip)
+        // .then(() => TravelerTripManager.getAll())
+        // .then(travelerTrips =>
+        //   this.setState({
+        //     travelerTrips: travelerTrips
+        //   })
+        // )
+        }   
+
      addNewTask = (task) =>{
       return TaskManager.post(task)
         .then(() => TaskManager.getAll())
@@ -60,7 +73,18 @@ export default class ApplicationViews extends Component {
             tasks: tasks
           })
         )
-        } 
+        }
+        
+        addNewTrip = (trip) =>{
+          return TripManager.post(trip)
+            .then(() => TripManager.getAll())
+            .then(trips =>
+              this.setState({
+                trips: trips
+              })
+            )
+            }
+        
        registerNewUser(users){
           return LoginManager.post(users)
             //   .then(() => {
@@ -83,6 +107,12 @@ export default class ApplicationViews extends Component {
         TaskManager.getAll().then(allTasks => {
           this.setState({
               tasks: allTasks
+          })
+        })
+
+        TripManager.getAll().then(allTrips => {
+          this.setState({
+              trips: allTrips
           })
         })
 
@@ -119,12 +149,13 @@ export default class ApplicationViews extends Component {
             />
             <Route
               exact path="/travelers" render={props => {
-                return ( <TravelerList {...props} travelers={this.state.travelers} /> )
+                return ( <TravelerList {...props} travelers={this.state.travelers} trips={this.state.trips}/> )
               }}
             />
             <Route
               exact path="/newTraveler" render={props => {
-                return ( <TravelerForm {...props} addNewTraveler={this.addNewTraveler} /> )
+                return ( <TravelerForm {...props} addNewTraveler={this.addNewTraveler} trips={this.state.trips} 
+                  addTravelerTrip={this.addTravelerTrip}/> )
               }}
             />
             <Route
@@ -140,6 +171,16 @@ export default class ApplicationViews extends Component {
             <Route
               path="/tasks/:taskId(\d+)/edit" render={props => {
                 return <TaskEditForm {...props} updateTask={this.updateTask}/>
+              }}
+            />
+            <Route
+              path="/trips" render={props => {
+                 return ( <TripList {...props} trips={this.state.trips} /> )
+              }}
+            />
+            <Route
+              path="/newTrip" render={props => {
+                 return ( <TripForm {...props} addNewTrip={this.addNewTrip} /> )
               }}
             />
         </React.Fragment>
