@@ -8,6 +8,7 @@ import Registration from "./login/Registration"
 import TravelerForm from "./traveler/TravelForm"
 import TripForm from "./trip/TripForm"
 import TaskForm from "./task/TaskForm"
+import TripEditForm from "./trip/TripEditForm"
 import TaskEditForm from "./task/TaskEditForm"
 import LoginForm from "./login/LoginForm"
 import RegistrationForm from "./login/RegistrationForm"
@@ -84,8 +85,18 @@ export default class ApplicationViews extends Component {
               })
             )
             }
+
+        updateTrip = (tripId, editedTripObj) =>{
+          return TripManager.put(tripId, editedTripObj)
+            .then(() => TripManager.getAll())
+            .then(trips =>
+              this.setState({
+                trips: trips
+              })
+            )
+            }    
         
-       registerNewUser(users){
+        registerNewUser(users){
           return LoginManager.post(users)
             //   .then(() => {
             //   return LoginManager.getAll()})
@@ -181,6 +192,11 @@ export default class ApplicationViews extends Component {
             <Route
               path="/newTrip" render={props => {
                  return ( <TripForm {...props} addNewTrip={this.addNewTrip} /> )
+              }}
+            />
+            <Route
+              path="/trips/:tripId(\d+)/edit" render={props => {
+                return <TripEditForm {...props} updateTrip={this.updateTrip}/>
               }}
             />
         </React.Fragment>
