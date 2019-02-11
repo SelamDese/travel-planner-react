@@ -13,5 +13,20 @@ export default {
         },
         body: JSON.stringify(newTrip)
       }).then(data => data.json())
-    }
+    },
+
+    get(id) {
+      return fetch(`${remoteURL}/trips/${id}`)
+      .then(e => e.json())
+    },
+
+    put(tripId, existingtrip) {
+      return fetch(`${remoteURL}/trips/${tripId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(existingtrip)
+      }).then(data => data.json());
+  },
 }
