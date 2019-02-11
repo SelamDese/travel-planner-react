@@ -28,5 +28,11 @@ export default {
         },
         body: JSON.stringify(existingtrip)
       }).then(data => data.json());
-  },
+    },
+
+    removeTrip(id) {
+      return fetch(`${remoteURL}/trips/${id}`, {
+        method: "DELETE"
+      })
+  }
 }
