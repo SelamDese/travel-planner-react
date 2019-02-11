@@ -10,6 +10,7 @@ export default class TripList extends Component {
                  <p> {trip.place} </p>
                  <p> {trip.tripYear} </p>
                  <Link to={`/trips/${trip.id}/edit`}>Edit</Link>
+                 <a href="#" onClick={() => this.props.deleteTrip(trip.id)}> Delete </a>
             </div>
           ))}
           <div>
