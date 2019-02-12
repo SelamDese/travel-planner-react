@@ -13,5 +13,19 @@ export default {
           },
           body: JSON.stringify(newTraveler)
         }).then(data => data.json())
-      }
+    },
+    get(id) {
+      return fetch(`${remoteURL}/travelers/${id}`)
+      .then(e => e.json())
+  },
+
+    put(travelerId, existingTraveler) {
+      return fetch(`${remoteURL}/travelers/${travelerId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(existingTraveler)
+      }).then(data => data.json());
+  },
 }
