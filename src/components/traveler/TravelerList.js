@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { Link } from "react-router-dom"
 
 export default class TravelerList extends Component {
     render() {
@@ -13,6 +14,7 @@ export default class TravelerList extends Component {
                    {this.props.trips.map(trip=> (
                    <p key={trip.id}>{trip.place}</p>
                    ))}
+                   <Link to={`/travelers/${traveler.id}/edit`}>Edit</Link>
               </div>
             ))}
               <div>
