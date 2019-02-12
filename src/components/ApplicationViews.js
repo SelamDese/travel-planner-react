@@ -8,6 +8,7 @@ import Registration from "./login/Registration"
 import TravelerForm from "./traveler/TravelForm"
 import TripForm from "./trip/TripForm"
 import TaskForm from "./task/TaskForm"
+import TravelerEditForm from "./traveler/TravelerEditForm"
 import TripEditForm from "./trip/TripEditForm"
 import TaskEditForm from "./task/TaskEditForm"
 import LoginForm from "./login/LoginForm"
@@ -28,13 +29,23 @@ export default class ApplicationViews extends Component {
      }
      addNewTraveler = (traveler) =>{
       return TravelerManager.post(traveler)
-        // .then(() => TravelerManager.getAll())
-        // .then(travelers =>
-        //   this.setState({
-        //     travelers: travelers
-        //   })
-        // )
+        .then(() => TravelerManager.getAll())
+        .then(travelers =>
+          this.setState({
+            travelers: travelers
+          })
+        )
         }
+
+     updateTraveler = (travelerId, editedTravelerObj) =>{
+      return TravelerManager.put(travelerId, editedTravelerObj)
+        .then(() => TravelerManager.getAll())
+        .then(travelers =>
+          this.setState({
+            travelers: travelers
+          })
+        )
+        }   
 
      addTravelerTrip = (travelerTrip) =>{
       return TravelerTripManager.post(travelerTrip)
@@ -177,6 +188,11 @@ export default class ApplicationViews extends Component {
               exact path="/newTraveler" render={props => {
                 return ( <TravelerForm {...props} addNewTraveler={this.addNewTraveler} trips={this.state.trips} 
                   addTravelerTrip={this.addTravelerTrip}/> )
+              }}
+            />
+             <Route
+              path="/travelers/:travelerId(\d+)/edit" render={props => {
+                return <TravelerEditForm {...props} updateTraveler={this.updateTraveler} trips={this.state.trips}/>
               }}
             />
             <Route
