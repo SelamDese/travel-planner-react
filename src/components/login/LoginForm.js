@@ -25,7 +25,7 @@ export default class LoginForm extends Component {
    render() {
     return (
   <React.Fragment>
-    <form>
+    <form className="logInForm">
       <div>
         <label htmlFor="userName">User Name </label>
         <input type="text" required id="userName"
