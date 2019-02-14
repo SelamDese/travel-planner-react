@@ -29,6 +29,16 @@ export default class ApplicationViews extends Component {
      }
      addNewTraveler = (traveler) =>{
       return TravelerManager.post(traveler)
+        // .then(() => TravelerManager.getAll())
+        // .then(travelers =>
+        //   this.setState({
+        //     travelers: travelers
+        //   })
+        // )
+        }
+
+     updateTraveler = (travelerId, editedTravelerObj) =>{
+      return TravelerManager.put(travelerId, editedTravelerObj)
         .then(() => TravelerManager.getAll())
         .then(travelers =>
           this.setState({
@@ -36,11 +46,11 @@ export default class ApplicationViews extends Component {
           })
         )
         }
-
-     updateTraveler = (travelerId, editedTravelerObj) =>{
-      return TravelerManager.put(travelerId, editedTravelerObj)
+        
+     deleteTraveler = (id) => {
+      return TravelerManager.removeTraveler(id)
         .then(() => TravelerManager.getAll())
-        .then(travelers =>
+        .then(travelers => 
           this.setState({
             travelers: travelers
           })
@@ -181,7 +191,7 @@ export default class ApplicationViews extends Component {
             />
             <Route
               exact path="/travelers" render={props => {
-                return ( <TravelerList {...props} travelers={this.state.travelers} trips={this.state.trips}/> )
+                return ( <TravelerList {...props} deleteTraveler={this.deleteTraveler} travelers={this.state.travelers} trips={this.state.trips}/> )
               }}
             />
             <Route
@@ -196,7 +206,7 @@ export default class ApplicationViews extends Component {
               }}
             />
             <Route
-              path="/tasks" render={props => {
+              exact path="/tasks" render={props => {
                 return <TaskList {...props} {...props} deleteTask={this.deleteTask} tasks={this.state.tasks}/>
               }}
             />
@@ -211,7 +221,7 @@ export default class ApplicationViews extends Component {
               }}
             />
             <Route
-              path="/trips" render={props => {
+              exact path="/trips" render={props => {
                  return ( <TripList {...props} deleteTrip={this.deleteTrip} trips={this.state.trips} /> )
               }}
             />
