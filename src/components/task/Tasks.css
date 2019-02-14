@@ -1,0 +1,66 @@
+body{
+  background-color:rgb(65, 106, 145);
+  display:flex;
+  justify-content:center;
+  flex-direction: column;
+  font-weight:bold;
+  color:black;
+}
+section div{
+  display:flex;
+    justify-content:center;
+    flex-direction: column;
+    width:20%;
+    margin:0 auto;
+    margin-top:50px;
+    background-color: rgb(49, 58, 136);
+    padding-left:30px;
+    padding-right:30px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-radius:40px;
+    font-weight:bold;
+    color:white;
+}
+.taskForm{
+    display:flex;
+    justify-content:center;
+    flex-direction: column;
+    width:35%;
+    margin:0 auto;
+    margin-top:100px;
+    background-color: rgb(73, 120, 129);
+    padding-left:80px;
+    padding-right:80px;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    border-radius:40px;
+    font-weight:bold;
+    color:black;
+  }
+  .taskEditForm{
+    display:flex;
+    justify-content:center;
+    flex-direction: column;
+    width:35%;
+    margin:0 auto;
+    margin-top:100px;
+    background-color: rgb(73, 120, 129);
+    padding-left:80px;
+    padding-right:80px;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    border-radius:40px;
+    font-weight:bold;
+    color:black;
+  }
+  .form-btn{
+    background-color:rgb(148, 171, 180);
+    justify-content:center;
+    width:20%;
+  }
+  .form-btn{
+    background-color:rgb(20, 84, 109);
+    justify-content:center;
+    width:50%;
+  }

@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import "./Tasks.css"
 
 export default class TaskForm extends Component {
   state = {
@@ -19,7 +20,8 @@ export default class TaskForm extends Component {
     const newTask = {
       taskName: this.state.taskName,
       dueDate: this.state.dueDate,
-      complitionDate:this.state.complitionDate
+      complitionDate:this.state.complitionDate,
+      userId: 1
     }
       this.props.addNewTask(newTask)
         .then(() => this.props.history.push("/tasks"))
@@ -28,7 +30,7 @@ export default class TaskForm extends Component {
   render() {
     return (
   <React.Fragment>
-    <form>
+    <form className="taskForm">
       <div>
         <label htmlFor="taskName">Task Name</label>
         <input type="text" required id="taskName"
@@ -47,7 +49,7 @@ export default class TaskForm extends Component {
          onChange={this.handleTaskFieldChange}
         />
       </div>
-      <button type="Save" onClick={this.constructTask} > Save </button>
+      <button className="form-btn" type="Save" onClick={this.constructTask} > Save </button>
     </form>
   </React.Fragment>
     )

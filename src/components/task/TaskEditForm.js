@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import TaskManager from "../../modules/TaskManager"
+import "./Tasks.css"
 
 export default class TaskEditForm extends Component {
 
@@ -41,7 +42,7 @@ export default class TaskEditForm extends Component {
     render() {
         return (
             <React.Fragment>
-                <form>
+                <form className="tasksEditForm">
                     <div>
                         <label htmlFor="taskName">Task Name</label>
                         <input type="text" required id="taskName" value = {this.state.taskName}
@@ -59,7 +60,7 @@ export default class TaskEditForm extends Component {
                            />
                     </div>
                     
-                    <button type="submit" onClick={this.updateExistingTask} >Submit</button>
+                    <button className="form-btn" type="submit" onClick={this.updateExistingTask} >Submit</button>
                 </form>
             </React.Fragment>
         )

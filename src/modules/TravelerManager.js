@@ -2,7 +2,7 @@ const remoteURL = "http://localhost:5002"
 
 export default {
     getAll() {
-      return fetch(`${remoteURL}/travelers`)
+      return fetch(`${remoteURL}/travelers/?_expand=place`)
       .then(e => e.json())
     },
     post(newTraveler) {
@@ -28,4 +28,10 @@ export default {
         body: JSON.stringify(existingTraveler)
       }).then(data => data.json());
   },
+
+    removeTraveler(id) {
+      return fetch(`${remoteURL}/travelers/${id}`, {
+        method: "DELETE"
+      })
+  }
 }

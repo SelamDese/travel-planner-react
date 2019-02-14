@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
+import "./Tasks.css"
 
 export default class TaskList extends Component {
     render() {
@@ -14,7 +15,7 @@ export default class TaskList extends Component {
                   <a href="#" onClick={() => this.props.deleteTask(task.id)}> Delete </a>
               </div>
             ))}
-            <div>
+            <div className="addNewTaskbtn">
               <button type="button"
                   onClick={() => {
                       this.props.history.push("/newTask")

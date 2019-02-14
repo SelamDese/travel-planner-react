@@ -1,11 +1,13 @@
 import React, { Component } from "react"
+import "./Traveler.css"
 
 export default class TravelerForm extends Component {
   state = {
    firstName: "",
    lastName: "",
    numberOfFamily: "",
-   place:""
+   payment:false,
+   place:1
   }
 
   handleTravelerFieldChange = (evt) => {
@@ -21,52 +23,60 @@ export default class TravelerForm extends Component {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       numberOfFamily: this.state.numberOfFamily,
-      // place: this.state.place
+      userId:1
     }
   
       this.props.addNewTraveler(newTraveler)
         .then((any) => {
-console.log(any)
+         console.log(any)
       const newTravelerTrip = {
-        place: this.state.place,
+        tripId: this.state.place,
+        payment: this.state.payment,
         travelerId:any.id
       }    
 
         this.props.addTravelerTrip(newTravelerTrip)
-        .then(() => this.props.history.push("/travelers"))
+        .then((anyThing) =>{ this.props.history.push("/travelers")
+        console.log(anyThing)})
     })
   }
 
   render() {
     return (
   <React.Fragment>
-    <form>
+    <form className="travelerForm">
       <div>
-        <label htmlFor="firstName">First Name</label>
+        <label htmlFor="firstName"> First Name </label>
         <input type="text" required id="firstName"
          onChange={this.handleTravelerFieldChange}
         />
       </div>
       <div>
-        <label htmlFor="lastName">Last Name</label>
+        <label htmlFor="lastName"> Last Name </label>
         <input type="text" required id="lastName"
          onChange={this.handleTravelerFieldChange}
         />
       </div>
       <div>
-        <label htmlFor="numberOfFamily">Number Of Family</label>
+        <label htmlFor="numberOfFamily"> Number Of Family </label>
         <input type="text" required id="numberOfFamily"
          onChange={this.handleTravelerFieldChange}
         />
       </div>
       <div>
         <label htmlFor="place">Trip Place</label>
-        <select value="" id="place"
+        <select value={this.state.place} id="place"
          onChange={this.handleTravelerFieldChange}>
-          {this.props.trips.map(trip=> <option key={trip.id}>{trip.place}</option>)}
+          {this.props.trips.map(trip=> <option value={trip.id} key={trip.id}>{trip.place}</option>)}
         </select>
       </div>
-      <button type="Save" onClick={this.constructTrveler} > Save </button>
+      <div>
+        <label htmlFor="payment">payment</label>
+        <input type="checkbox" required id="payment"
+         onChange={this.handleTravelerFieldChange}
+        />
+      </div>
+      <button className="form-btn" type="Save" onClick={this.constructTrveler} > Save </button>
     </form>
   </React.Fragment>
     )
