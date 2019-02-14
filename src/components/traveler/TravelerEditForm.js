@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import TravelerManager from "../../modules/TravelerManager"
+import "./Traveler.css"
 
 export default class TravelerEditForm extends Component {
 
@@ -44,7 +45,7 @@ export default class TravelerEditForm extends Component {
     render() {
         return (
             <React.Fragment>
-                <form>
+                <form className="travelrForm">
                     <div>
                         <label htmlFor="firstName">First Name</label>
                         <input type="text" required id="firstName" value = {this.state.firstName}
@@ -67,7 +68,7 @@ export default class TravelerEditForm extends Component {
                         {this.props.trips.map(trip=> <option key={trip.id}>{trip.place}</option>)}
                         </select>
                     </div>
-                    <button type="submit" onClick={this.updateExistingTraveler} >Submit</button>
+                    <button className="form-btn" type="submit" onClick={this.updateExistingTraveler} >Submit</button>
                 </form>
             </React.Fragment>
         )
