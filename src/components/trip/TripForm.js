@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import "./Trips.css"
 
 export default class TripForm extends Component {
   state = {
@@ -17,7 +18,8 @@ export default class TripForm extends Component {
     evt.preventDefault()
     const newTrip = {
       place: this.state.place,
-      tripYear: this.state.tripYear
+      tripYear: this.state.tripYear,
+      userId: 1
     }
       this.props.addNewTrip(newTrip)
         .then(() => this.props.history.push("/trips"))
@@ -26,7 +28,7 @@ export default class TripForm extends Component {
   render() {
     return (
   <React.Fragment>
-    <form>
+    <form className="tripForm">
       <div>
         <label htmlFor="place">Place</label>
         <input type="text" required id="place"
@@ -39,7 +41,7 @@ export default class TripForm extends Component {
          onChange={this.handleTripFieldChange}
         />
       </div>
-      <button type="Save" onClick={this.constructTrip} > Save </button>
+      <button className="form-btn" type="Save" onClick={this.constructTrip} > Save </button>
     </form>
   </React.Fragment>
     )
