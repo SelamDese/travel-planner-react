@@ -27,20 +27,21 @@ export default class TravelerForm extends Component {
     }
   
       this.props.addNewTraveler(newTraveler)
-        .then((any) => {
-         console.log(any)
+      .then((travelerTrip) => {
       const newTravelerTrip = {
         tripId: this.state.place,
         payment: this.state.payment,
-        travelerId:any.id
+        travelerId:travelerTrip.id
       }    
 
-        this.props.addTravelerTrip(newTravelerTrip)
-        .then((anyThing) =>{ this.props.history.push("/travelers")
-        console.log(anyThing)})
+    this.props.addTravelerTrip(newTravelerTrip)
+      .then ( ()=>{this.props.setTravelerState()
+      .then(() => {
+        this.props.history.push("/travelers")
+      })
+    })
     })
   }
-
   render() {
     return (
   <React.Fragment>

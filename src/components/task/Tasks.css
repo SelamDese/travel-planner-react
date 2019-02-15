@@ -31,23 +31,7 @@ section div{
     margin-top:100px;
     background-color: rgb(73, 120, 129);
     padding-left:80px;
-    padding-right:80px;
-    padding-bottom: 50px;
-    padding-top: 50px;
-    border-radius:40px;
-    font-weight:bold;
-    color:black;
-  }
-  .taskEditForm{
-    display:flex;
-    justify-content:center;
-    flex-direction: column;
-    width:35%;
-    margin:0 auto;
-    margin-top:100px;
-    background-color: rgb(73, 120, 129);
-    padding-left:80px;
-    padding-right:80px;
+    padding-right:100px;
     padding-bottom: 50px;
     padding-top: 50px;
     border-radius:40px;
@@ -58,9 +42,4 @@ section div{
     background-color:rgb(148, 171, 180);
     justify-content:center;
     width:20%;
-  }
-  .form-btn{
-    background-color:rgb(20, 84, 109);
-    justify-content:center;
-    width:50%;
   }
