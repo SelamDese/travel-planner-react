@@ -29,13 +29,16 @@ export default class ApplicationViews extends Component {
      }
      addNewTraveler = (traveler) =>{
       return TravelerManager.post(traveler)
-        // .then(() => TravelerManager.getAll())
-        // .then(travelers =>
-        //   this.setState({
-        //     travelers: travelers
-        //   })
-        // )
         }
+
+     setTravelerState = () => {
+       return TravelerManager.getAll()
+        .then(travelers =>
+          this.setState({
+            travelers: travelers
+          })
+        )
+     }   
 
      updateTraveler = (travelerId, editedTravelerObj) =>{
       return TravelerManager.put(travelerId, editedTravelerObj)
@@ -141,8 +144,16 @@ export default class ApplicationViews extends Component {
      componentDidMount() {
 
         TravelerManager.getAll().then(allTravelers => {
+          console.log(allTravelers)
           this.setState({
             travelers: allTravelers
+          })
+        })
+
+        TravelerTripManager.getAll().then(allTravelerTrips => {
+          console.log(allTravelerTrips)
+          this.setState({
+            travelerTrips: allTravelerTrips
           })
         })
 
@@ -191,13 +202,15 @@ export default class ApplicationViews extends Component {
             />
             <Route
               exact path="/travelers" render={props => {
-                return ( <TravelerList {...props} deleteTraveler={this.deleteTraveler} travelers={this.state.travelers} trips={this.state.trips}/> )
+                return ( <TravelerList {...props} deleteTraveler={this.deleteTraveler} 
+                  travelers={this.state.travelers} travelerTrips={this.state.travelerTrips}/> )
               }}
             />
             <Route
               exact path="/newTraveler" render={props => {
-                return ( <TravelerForm {...props} addNewTraveler={this.addNewTraveler} trips={this.state.trips} 
-                  addTravelerTrip={this.addTravelerTrip}/> )
+                return ( <TravelerForm {...props} addNewTraveler={this.addNewTraveler} 
+                  travelerTrips={this.state.travelerTrips} trips={this.state.trips}
+                  addTravelerTrip={this.addTravelerTrip} setTravelerState={this.setTravelerState}/> )
               }}
             />
              <Route
