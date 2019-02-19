@@ -5,7 +5,8 @@ export default class TaskForm extends Component {
   state = {
    taskName: "",
    dueDate: "",
-   complitionDate:""
+   complitionDate:"",
+   userId: sessionStorage.getItem("User")
   }
 
   handleTaskFieldChange = (evt) => {
@@ -21,7 +22,7 @@ export default class TaskForm extends Component {
       taskName: this.state.taskName,
       dueDate: this.state.dueDate,
       complitionDate:this.state.complitionDate,
-      userId: 1
+      userId: sessionStorage.getItem("User")
     }
       this.props.addNewTask(newTask)
         .then(() => this.props.history.push("/tasks"))
