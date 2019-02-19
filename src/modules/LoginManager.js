@@ -1,7 +1,7 @@
 const remoteURL = "http://localhost:5002"
 
 export default {
-    getAll() {
+    getAllUsers() {
       return fetch(`${remoteURL}/users`)
       .then(e => e.json())
     },
@@ -16,7 +16,7 @@ export default {
       }).then(data => data.json())
     },
 
-    checkUser(username, password) {
+    verifyUser(username, password) {
       return fetch(`${remoteURL}/users?username=${username}&password=${password}`)
         .then(res => res.json())
         
