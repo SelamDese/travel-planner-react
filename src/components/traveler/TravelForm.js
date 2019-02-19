@@ -7,8 +7,13 @@ export default class TravelerForm extends Component {
    lastName: "",
    numberOfFamily: "",
    payment:false,
-   place:1
+   userId: sessionStorage.getItem("User")
   }
+ componentDidMount(){
+this.setState({
+  place:this.props.trips[0].id
+})
+ }
 
   handleTravelerFieldChange = (evt) => {
     evt.preventDefault()
@@ -23,7 +28,7 @@ export default class TravelerForm extends Component {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       numberOfFamily: this.state.numberOfFamily,
-      userId:1
+      userId: this.state.userId
     }
   
       this.props.addNewTraveler(newTraveler)
@@ -32,7 +37,7 @@ export default class TravelerForm extends Component {
         tripId: this.state.place,
         payment: this.state.payment,
         travelerId:travelerTrip.id
-      }    
+      } 
 
     this.props.addTravelerTrip(newTravelerTrip)
       .then ( ()=>{this.props.setTravelerState()

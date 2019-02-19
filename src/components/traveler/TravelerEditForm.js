@@ -8,7 +8,8 @@ export default class TravelerEditForm extends Component {
         firstName: "",
         lastName: "",
         numberOfFamily: "",
-        place:""
+        place:"",
+        userId: sessionStorage.getItem("User")
        }
 
     handleEditTravelerFieldChange = evt => {
@@ -23,7 +24,8 @@ export default class TravelerEditForm extends Component {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         numberOfFamily: this.state.numberOfFamily,
-        place: this.state.place
+        place: this.state.place,
+        userId: this.state.userId
       }
 
     this.props.updateTraveler(this.props.match.params.travelerId, existingTraveler)
