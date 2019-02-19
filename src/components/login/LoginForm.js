@@ -14,13 +14,37 @@ export default class LoginForm extends Component {
 
   constructLogin = (evt) => {
     evt.preventDefault()
-    const newUser = {
-        userName: this.state.userName,
-        password: this.state.password
-        }
-        this.props.registerNewUser(newUser)
-        .then(() => this.props.history.push("/"))
-   }
+    this.props.verifyExistingUser(this.state.username, this.state.password)
+    .then(user => {
+        if (user.length === 0) {
+          alert("please register below")
+        } else { 
+          user.forEach(use => {
+            let loggedIn = false;
+            if (this.state.username === use.username && this.state.password === use.password) {
+              loggedIn = true;
+            }
+            if (loggedIn === true) {
+              sessionStorage.setItem("User", use.id)
+              let sessionUser = sessionStorage.getItem("User")
+              //let sessionUserNumber = Number(sessionUser)
+              console.log("sessionUser:", sessionUser)
+              // this.props.history.push("/travelers")
+            }
+          })
+       }
+      }) 
+    this.props.setTravelerState()
+      .then(() => {
+        this.props.history.push("/travelers")
+      })
+
+    // this.props.getUsers()
+    // .then(() => {
+    //   this.props.history.push("/")
+    // })
+    // this.props.setUserState()
+  }
 
    render() {
     return (

@@ -14,13 +14,29 @@ export default class RegistrationForm extends Component {
 
   constructUsers = (evt) => {
     evt.preventDefault()
+    this.props.getUsers()
+      .then(allUsers => {
+        let usersArray = allUsers.filter(user => {
+          return (user.userName === this.state.userName)
+      })
+      if (usersArray.length > 0) {
+          alert("please register")
+      } else {
+          alert(`Welcome ${this.state.userName}!`)
     const newUser = {
         userName: this.state.userName,
         password: this.state.password
         }
-        this.props.registerNewUser(newUser)
-        .then(() => this.props.history.push("/"))
-   }
+        this.props.postUser(newUser)
+          .then(() => {
+            this.props.getUsers()
+              .then(() => {
+                this.props.history.push("/")
+              })
+          })
+      }
+    })
+  }
 
    render() {
     return (
