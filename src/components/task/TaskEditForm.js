@@ -7,7 +7,8 @@ export default class TaskEditForm extends Component {
     state = {
         taskName: "",
         dueDate: "",
-        complitionDate: ""
+        complitionDate: "",
+        userId: sessionStorage.getItem("User")
        }
 
     handleEditTaskFieldChange = evt => {
@@ -21,7 +22,8 @@ export default class TaskEditForm extends Component {
       const existingTask = {
         taskName: this.state.taskName,
         dueDate: this.state.dueDate,
-        complitionDate: this.state.complitionDate
+        complitionDate: this.state.complitionDate,
+        userId:sessionStorage.getItem("User")
       }
 
     this.props.updateTask(this.props.match.params.taskId, existingTask)

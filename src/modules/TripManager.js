@@ -2,7 +2,8 @@ const remoteURL = "http://localhost:5002"
 
 export default {
     getAll() {
-      return fetch(`${remoteURL}/trips`)
+      let userId= sessionStorage.getItem("User")
+      return fetch(`${remoteURL}/trips?userId=${userId}`)
       .then(e => e.json())
     },
     post(newTrip) {

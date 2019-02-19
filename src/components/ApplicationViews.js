@@ -4,7 +4,7 @@ import TravelerList from "./traveler/TravelerList"
 import TaskList from "./task/TaskList"
 import TripList from "./trip/TripList"
 import LoginList from "./login/LoginList"
-import Registration from "./login/Registration"
+import Registration from "./login/RegistrationList"
 import TravelerForm from "./traveler/TravelForm"
 import TripForm from "./trip/TripForm"
 import TaskForm from "./task/TaskForm"
@@ -25,8 +25,44 @@ export default class ApplicationViews extends Component {
       trips: [],
       tasks: [],
       users:[],
-      travelerTrips:[]
+      travelerTrips:[],
+      userId:sessionStorage.getItem("User")
      }
+
+     isAuthenticated = () => sessionStorage.getItem("User") !==null
+
+    getUsers = () => {
+      return LoginManager.getAllUsers("users")
+      // .then(users =>
+      //   this.setState({
+      //     userId: users
+      //   })
+      // )
+    }
+
+    postUser = (newUser) => {
+      return LoginManager.post(newUser)
+        .then(() => LoginManager.getAllUsers("users"))
+    }
+
+    setUserState = () => {
+      return LoginManager.getAllUsers()
+      .then(users =>
+        this.setState({
+          users: users
+        })
+      )
+    }
+
+    verifyExistingUser = (username, password) => {
+      return LoginManager.verifyUser(username, password)
+      // .then(users =>
+      //   this.setState({
+      //     users: users
+      //   })
+      // )
+    }
+
      addNewTraveler = (traveler) =>{
       return TravelerManager.post(traveler)
         }
@@ -129,17 +165,6 @@ export default class ApplicationViews extends Component {
               })
             )
             }     
-        
-        registerNewUser(users){
-          return LoginManager.post(users)
-            //   .then(() => {
-            //   return LoginManager.getAll()})
-            //   .then(users =>
-            //   this.setState({
-            //   users: users
-            //   })
-            // )
-          }
 
      componentDidMount() {
 
@@ -169,7 +194,7 @@ export default class ApplicationViews extends Component {
           })
         })
 
-        LoginManager.getAll().then(allUsers => {
+        LoginManager.getAllUsers().then(allUsers => {
           this.setState({
               users: allUsers
           })
@@ -182,28 +207,31 @@ export default class ApplicationViews extends Component {
     
             <Route
               exact path="/" render={props => {
-                return ( <Registration {...props} users={this.state.users} /> )
+                return ( <Registration {...props} users={this.state.users} getUsers={this.getUsers} postUser={this.postUser}/> )
               }}
             />
             <Route
-              path="/newUser" render={props => {
-                return ( <RegistrationForm {...props} registerNewUser={this.registerNewUser} /> )
+              exact path="/newUser" render={props => {
+                return ( <RegistrationForm {...props} users={this.state.users} getUsers={this.getUsers} postUser={this.postUser} /> )
               }}
             />
               <Route
                 exact path="/" render={props => {
-                   return ( <LoginList {...props} users={this.state.users} /> )
+                   return ( <LoginList {...props} users={this.state.users} getUsers={this.getUsers} 
+                                                  verifyExistingUser={this.verifyExistingUser} /> )
                 }}
               />
             <Route
               path="/userLogin" render={props => {
-                 return ( <LoginForm {...props} registerNewUser={this.registerNewUser} /> )
+                 return ( <LoginForm {...props} users={this.state.users} getUsers={this.getUsers} 
+                         verifyExistingUser={this.verifyExistingUser} setUserState={this.setUserState}
+                         addTravelerTrip={this.addTravelerTrip} setTravelerState={this.setTravelerState}/> )
               }}
             />
             <Route
               exact path="/travelers" render={props => {
                 return ( <TravelerList {...props} deleteTraveler={this.deleteTraveler} 
-                  travelers={this.state.travelers} travelerTrips={this.state.travelerTrips}/> )
+                  travelers={this.state.travelers} travelerTrips={this.state.travelerTrips} trips={this.state.trips}/> )
               }}
             />
             <Route

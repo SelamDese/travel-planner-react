@@ -5,7 +5,8 @@ export default class TripEditForm extends Component {
 
     state = {
         place: "",
-        tripYear: ""
+        tripYear: "",
+        userId: sessionStorage.getItem("User")
        }
 
     handleEditTripFieldChange = evt => {
@@ -18,7 +19,9 @@ export default class TripEditForm extends Component {
       evt.preventDefault()
       const existingTrip = {
         place: this.state.place,
-        tripYear: this.state.tripYear
+        tripYear: this.state.tripYear,
+        userId: this.state.userId
+
       }
 
     this.props.updateTrip(this.props.match.params.tripId, existingTrip)

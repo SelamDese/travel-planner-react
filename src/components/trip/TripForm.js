@@ -19,7 +19,7 @@ export default class TripForm extends Component {
     const newTrip = {
       place: this.state.place,
       tripYear: this.state.tripYear,
-      userId: 1
+      userId: sessionStorage.getItem("User")
     }
       this.props.addNewTrip(newTrip)
         .then(() => this.props.history.push("/trips"))
