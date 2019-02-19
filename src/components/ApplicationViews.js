@@ -12,12 +12,14 @@ import TravelerEditForm from "./traveler/TravelerEditForm"
 import TripEditForm from "./trip/TripEditForm"
 import TaskEditForm from "./task/TaskEditForm"
 import LoginForm from "./login/LoginForm"
+// import LogOutList from "./login/LogOutList"
 import RegistrationForm from "./login/RegistrationForm"
 import TravelerManager from "../modules/TravelerManager"
 import TaskManager from "../modules/TaskManager"
 import TripManager from "../modules/TripManager"
 import LoginManager from "../modules/LoginManager"
 import TravelerTripManager from "../modules/TravelerTripManager"
+import LogOut from "./login/Logout"
 
 export default class ApplicationViews extends Component {
     state = {
@@ -33,11 +35,11 @@ export default class ApplicationViews extends Component {
 
     getUsers = () => {
       return LoginManager.getAllUsers("users")
-      // .then(users =>
-      //   this.setState({
-      //     userId: users
-      //   })
-      // )
+      .then(users =>
+        this.setState({
+          users: users
+        })
+      )
     }
 
     postUser = (newUser) => {
@@ -47,9 +49,9 @@ export default class ApplicationViews extends Component {
 
     setUserState = () => {
       return LoginManager.getAllUsers()
-      .then(users =>
+      .then(() =>
         this.setState({
-          users: users
+          userId: sessionStorage.getItem("User")
         })
       )
     }
@@ -164,19 +166,17 @@ export default class ApplicationViews extends Component {
                 trips: trips
               })
             )
-            }     
+            }
 
      componentDidMount() {
 
         TravelerManager.getAll().then(allTravelers => {
-          console.log(allTravelers)
           this.setState({
             travelers: allTravelers
           })
         })
 
         TravelerTripManager.getAll().then(allTravelerTrips => {
-          console.log(allTravelerTrips)
           this.setState({
             travelerTrips: allTravelerTrips
           })
@@ -221,11 +221,23 @@ export default class ApplicationViews extends Component {
                                                   verifyExistingUser={this.verifyExistingUser} /> )
                 }}
               />
+              <Route
+                exact path="/" render={props => {
+                   return ( <LogOut {...props} users={this.state.users} getUsers={this.getUsers} 
+                                                  verifyExistingUser={this.verifyExistingUser} /> )
+                }}
+              />
+              {/* <Route
+                exact path="/" render={props => {
+                   return ( <LogOutList {...props} users={this.state.users} getUsers={this.getUsers} 
+                                                  verifyExistingUser={this.verifyExistingUser} /> )
+                }}
+              /> */}
             <Route
               path="/userLogin" render={props => {
                  return ( <LoginForm {...props} users={this.state.users} getUsers={this.getUsers} 
                          verifyExistingUser={this.verifyExistingUser} setUserState={this.setUserState}
-                         addTravelerTrip={this.addTravelerTrip} setTravelerState={this.setTravelerState}/> )
+                         addTravelerTrip={this.addTravelerTrip} /> )
               }}
             />
             <Route
