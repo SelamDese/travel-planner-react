@@ -11,7 +11,6 @@ export default class TravelerList extends Component {
                    <p> {traveler.lastName} </p>
                    <p> {traveler.numberOfFamily}</p>
                   {this.props.travelerTrips.map(travelerTrip => {
-                    console.log(travelerTrip)
                     if (traveler.id == travelerTrip.traveler.id) {
                    return <p key={travelerTrip.id}>{travelerTrip.trip.place}</p> 
                   }

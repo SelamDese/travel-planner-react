@@ -29,22 +29,27 @@ export default class LoginForm extends Component {
               let sessionUser = sessionStorage.getItem("User")
               //let sessionUserNumber = Number(sessionUser)
               console.log("sessionUser:", sessionUser)
-              // this.props.history.push("/travelers")
+              this.props.history.push("/travelers")
             }
           })
        }
       }) 
-    this.props.setTravelerState()
-      .then(() => {
-        this.props.history.push("/travelers")
-      })
+  //   this.props.setUserState()
+  //    .then(users =>
+  //       this.setState({
+  //         users: users
+  //       })
+  //     )
+  //     .then(() => {
+  //       this.props.history.push("/")
+  //     })
 
-    // this.props.getUsers()
-    // .then(() => {
-    //   this.props.history.push("/")
-    // })
-    // this.props.setUserState()
-  }
+  //   this.props.getUsers()
+  //   .then(() => {
+  //     this.props.history.push("/")
+  //   })
+  // }
+    }
 
    render() {
     return (
