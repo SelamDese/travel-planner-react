@@ -34,21 +34,6 @@ export default class LoginForm extends Component {
           })
        }
       }) 
-  //   this.props.setUserState()
-  //    .then(users =>
-  //       this.setState({
-  //         users: users
-  //       })
-  //     )
-  //     .then(() => {
-  //       this.props.history.push("/")
-  //     })
-
-  //   this.props.getUsers()
-  //   .then(() => {
-  //     this.props.history.push("/")
-  //   })
-  // }
     }
 
    render() {
@@ -63,7 +48,7 @@ export default class LoginForm extends Component {
       </div>
       <div>
         <label htmlFor="password">Password</label>
-        <input type="text" required id="password"
+        <input type="password" required id="password"
          onChange={this.handleFieldChange}
         />
       </div>

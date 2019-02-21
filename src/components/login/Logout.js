@@ -63,6 +63,7 @@ logout() {
     return (
   <React.Fragment>
     <form className="logOutForm">
+      <p>logOut</p>
       <button type="Save" onClick={this.logout}> LogOut </button>
     </form>
   </React.Fragment>
