@@ -11,7 +11,7 @@ export default class TravelerForm extends Component {
   }
  componentDidMount(){
 this.setState({
-  place:this.props.trips[0].id
+  place:this.props.trips.id
 })
  }
 

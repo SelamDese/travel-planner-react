@@ -35,11 +35,11 @@ export default class ApplicationViews extends Component {
 
     getUsers = () => {
       return LoginManager.getAllUsers("users")
-      .then(users =>
-        this.setState({
-          users: users
-        })
-      )
+      // .then(users =>
+      //   this.setState({
+      //     users: users
+      //   })
+      // )
     }
 
     postUser = (newUser) => {
