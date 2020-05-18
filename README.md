@@ -4,20 +4,20 @@ Travel planner is a single page CRUD Application to organize group travel, allow
 
 To run the application locally:
 
-Clone the repository
+. Clone the repository
 
-Change directory to src
+. Change directory to src
 
-Run the application
+. Run the application
 
-Register as a new user
+. Register as a new user
 
-Explore the application
+. Explore the application
 
 Built with
 
-A JavaScript library React
+. A JavaScript library React
 
-JSON-server as a server for storage and conditional rendering of user data
+. JSON-server as a server for storage and conditional rendering of user data
 
-Styled with CSS
+. Styled with CSS
