@@ -1,4 +1,5 @@
-#Travel planner
+Travel planner
+
 Travel planner is a single page CRUD Application to organize group travel, allowing users to register as organizers. In the application users can keep track of traveler status, places to stop by and manage tasks.
 
 To run the application locally:
